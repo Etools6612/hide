@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PANEL Pricelist</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#1f2937,#0f172a,#111827);
+color:white;
+}
+
+.container{
+width:420px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-radius:15px;
+padding:25px;
+box-shadow:0 0 30px rgba(0,0,0,0.6);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+.service{
+border-bottom:1px solid rgba(255,255,255,0.1);
+padding:10px 0;
+}
+
+.service span{
+display:block;
+font-size:14px;
+opacity:0.8;
+}
+
+.price{
+color:#22c55e;
+font-weight:bold;
+}
+
+.order-btn{
+margin-top:20px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.order-btn:hover{
+background:#1d4ed8;
+}
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-content{
+background:#0f172a;
+padding:25px;
+border-radius:10px;
+width:350px;
+text-align:center;
+}
+
+select{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:none;
+}
+
+.result{
+margin-top:15px;
+font-size:15px;
+}
+
+.code{
+margin-top:10px;
+font-size:18px;
+color:#22c55e;
+}
+
+.copy-btn{
+margin-top:10px;
+padding:8px 15px;
+border:none;
+background:#22c55e;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.link-btn{
+margin-top:15px;
+display:block;
+background:#2563eb;
+padding:10px;
+border-radius:6px;
+color:white;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Service Pricelist</h1>
+
+<div class="service">
+<b>Bypass API</b>
+<span class="price">₱300 Lifetime</span>
+<span>Uses: Using for bypass account no password or forgotten it 30-50% posible account open</span>
+</div>
+
+<div class="service">
+<b>Cracking API</b>
+<span class="price">₱250 Lifetime</span>
+<span>Uses: Old Cracking account maximize the account number process and generated password</span>
+</div>
+
+<div class="service">
+<b>DDOS API</b>
+<span class="price">₱350 Lifetime</span>
+<span>Uses:  Takedown server ( casino etc )</span>
+</div>
+
+<div class="service">
+<b>BRUTE FORCE API</b>
+<span class="price">₱400</span>
+<span>Uses: Using for brute forcing Facebook account that generates password with accurate system</span>
+</div>
+
+<div class="service">
+<b>GOOGLE PAGE AND SITE  API</b>
+<span class="price">₱400</span>
+<span>Uses:  Any google post that releated any violation you can paste link and Takedown there sites</span>
+</div>
+
+<div class="service">
+<b>Background Change</b>
+<span class="price">₱250</span>
+<span>Panel background changes</span>
+</div>
+
+<div class="service">
+<b>Admin User</b>
+<span class="price">₱180</span>
+<span>Change email & password</span>
+</div>
+
+<div class="service">
+<b>Change Design</b>
+<span class="price">₱200</span>
+<span>Custom design</span>
+</div>
+
+<div class="service">
+<b>Name Custom / Text Custom</b>
+<span class="price">₱200</span>
+</div>
+
+<button class="order-btn" onclick="openOrder()">ORDER NOW</button>
+
+</div>
+
+
+<div class="modal" id="orderModal">
+
+<div class="modal-content">
+
+<h2>Select Service</h2>
+
+<select id="serviceSelect" onchange="showPrice()">
+
+<option value="">Choose service</option>
+<option value="300|Brute force API">HI API</option>
+<option value="250|cracking API">HELLOW API</option>
+<option value="350|ddos API">JUST API</option>
+<option value="400|google and site API">MAXI API</option>
+<option value="400|bypass API">AHUH API</option>
+<option value="250|Background Change">Background Change</option>
+<option value="180|Admin User">Admin User</option>
+<option value="200|Change Design">Change Design</option>
+<option value="200|Name Custom">Name Custom</option>
+
+</select>
+
+<div class="result" id="priceResult"></div>
+<div class="code" id="codeResult"></div>
+
+<button class="copy-btn" onclick="copyCode()">Copy the code to redeem</button>
+
+<a class="link-btn" href="https://www.facebook.com/profile.php?id=61580283076687" target="_blank">
+Order Direct Here
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+function openOrder(){
+document.getElementById("orderModal").style.display="flex";
+}
+
+function randomCode(){
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+let code="";
+for(let i=0;i<10;i++){
+code+=chars.charAt(Math.floor(Math.random()*chars.length));
+}
+return code;
+}
+
+function showPrice(){
+
+let select=document.getElementById("serviceSelect").value;
+
+if(select==="") return;
+
+let data=select.split("|");
+
+let price=data[0];
+
+document.getElementById("priceResult").innerHTML="Price: ₱"+price;
+
+let code=randomCode();
+
+document.getElementById("codeResult").innerHTML=code;
+
+}
+
+function copyCode(){
+
+let text=document.getElementById("codeResult").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Code copied!");
+
+}
+
+</script>
+
+</body>
+</html>
